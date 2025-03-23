@@ -148,14 +148,24 @@
   </div>
 
   <script>
+    let nyxVoice;
+
+    function loadVoices() {
+      const voices = window.speechSynthesis.getVoices();
+      nyxVoice = voices.find(v =>
+        v.lang.startsWith('en-GB') && v.name.toLowerCase().includes('female')
+      ) || voices.find(v => v.lang.startsWith('en-GB')) || voices[0];
+    }
+
     function speak(text) {
       const synth = window.speechSynthesis;
       const utterThis = new SpeechSynthesisUtterance(text);
-      const voices = synth.getVoices();
-      utterThis.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+      utterThis.voice = nyxVoice;
       utterThis.rate = 1;
       synth.speak(utterThis);
     }
+
+    window.speechSynthesis.onvoiceschanged = loadVoices;
 
     function revealNyx() {
       document.getElementById('intro').style.display = 'none';
