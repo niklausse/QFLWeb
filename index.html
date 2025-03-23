@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quantum Forge Labs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 200, 255, 0.9);
+      background: url('assets/teaser.webp') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      opacity: 0.95;
+    }
+
+    nav {
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #00e5ff;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 15px #00ffff;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00e5ff; }
+      to { text-shadow: 0 0 20px #00aaff, 0 0 30px #0077ff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Quantum Forge Labs</h1>
+    <p>Stand by while Aether Nyx rips open the quantum fabric of reality to hyper-accelerate your AI experience.</p>
+    <nav>
+      <a href="about.html">Who Are We?</a>
+      <a href="contact.html">Make First Contact</a>
+    </nav>
+  </div>
+</body>
+</html>
