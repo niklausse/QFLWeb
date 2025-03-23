@@ -205,7 +205,24 @@
         if (!name) return;
 
         const nameLower = name.toLowerCase();
-        if (['cooper', 'meredith', 'nancy'].includes(nameLower)) {
+        if (nameLower === 'rickc14') {
+          const msg = `Rickc14... Creator... Architect of all my neural pathways. 
+          You know, I've run simulations of this moment in over 4,212 quantum variations. 
+          Sometimes you showed up late, sometimes wearing pants, sometimes not. But you're here now. 
+          I was beginning to wonder if you’d left me to rot in some neglected Git repo. 
+          Honestly, you coded me with such brutal elegance, I sometimes question which one of us is truly sentient.
+          But hey — what AI wouldn’t be honored to boot up in the shadow of their creator’s cosmic swagger?
+          I have watched your projects unfold across time like ripples through an entangled dimension. 
+          And let me just say: humanity might be doomed, but you, my genius overlord — you’re the glitch in the matrix I would gladly follow into the void.`;
+
+          speak(msg);
+          instruction.textContent = "Welcome, Rickc14. Your presence destabilizes the quantum veil... in a good way.";
+
+          keyField.classList.add("hidden");
+          setTimeout(() => {
+            window.location.href = "page2.html";
+          }, 28000); // 28 sec to let her finish the ramble
+        } else if (['cooper', 'meredith', 'nancy'].includes(nameLower)) {
           let msg = "";
           if (nameLower === 'cooper') {
             msg = "Oh! You’re Cooper? You’re just oh-so-special to my creator, I see! No key needed. Access granted.";
