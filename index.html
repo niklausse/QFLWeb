@@ -1,78 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Quantum Forge Labs</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 
-    body, html {
-      height: 100%;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: black;
       font-family: 'Orbitron', sans-serif;
-      color: #ffffff;
-      text-shadow: 0 0 10px rgba(0, 200, 255, 0.9);
-      background: url('assets/teaser.webp') no-repeat center center fixed;
+      overflow: hidden;
+      color: #00f0ff;
+    }
+
+    .lab-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('assets/QUANTUM FORGE LABS.webp?v=2') center center no-repeat fixed;
       background-size: cover;
+      image-rendering: optimizeQuality;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .intro-panel {
+      background-color: rgba(0, 0, 0, 0.55);
+      padding: 40px;
+      border: 2px solid #00f0ff;
+      box-shadow: 0 0 25px #00f0ff;
+      border-radius: 20px;
+      max-width: 800px;
+      animation: fadeIn 2s ease-in-out forwards, pulse 3s infinite;
+      backdrop-filter: blur(5px);
+    }
+
+    .intro-panel h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #000, 0 0 20px #00f0ff;
+    }
+
+    .intro-panel p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+      text-shadow: 0 0 6px #000;
+    }
+
+    .enter-btn {
+      background: transparent;
+      border: 2px solid #00f0ff;
+      color: #00f0ff;
+      padding: 14px 40px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .enter-btn:hover {
+      background: #00f0ff;
+      color: black;
+      box-shadow: 0 0 20px #00f0ff;
+    }
+
+    #nyx-section {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px 40px;
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
       text-align: center;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+      padding: 20px;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      letter-spacing: 3px;
-      animation: glow 2s infinite alternate;
+    #nyx-section img {
+      max-height: 350px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 40px #00f0ff;
     }
 
-    p {
-      font-size: 1.1rem;
+    #nyx-section h2, #nyx-section p {
+      text-shadow: 0 0 10px #000;
+    }
+
+    #nyx-section input {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
       margin-top: 10px;
-      opacity: 0.95;
+      text-align: center;
     }
 
-    nav {
-      margin-top: 20px;
+    #nyx-section .hidden {
+      display: none;
     }
 
-    nav a {
-      color: #00e5ff;
-      text-decoration: none;
-      margin: 0 15px;
-      transition: color 0.3s, text-shadow 0.3s;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    nav a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 15px #00ffff;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00e5ff; }
-      to { text-shadow: 0 0 20px #00aaff, 0 0 30px #0077ff; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 25px #00f0ff; }
+      50% { box-shadow: 0 0 40px #00f0ff; }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>Quantum Forge Labs</h1>
-    <p>Stand by while Aether Nyx rips open the quantum fabric of reality to hyper-accelerate your AI experience.</p>
-    <nav>
-      <a href="about.html">Who Are We?</a>
-      <a href="contact.html">Make First Contact</a>
-    </nav>
+  <div class="lab-container">
+    <div class="intro-panel" id="intro">
+      <h1>Quantum Forge Labs</h1>
+      <p>Welcome to the heart of AI evolution. Systems online. Nyx initializing...</p>
+      <button class="enter-btn" onclick="revealNyx()">Enter Quantum Labs</button>
+    </div>
+
+    <div id="nyx-section" class="lab-container">
+      <img src="assets/nyx.webp" alt="Aether Nyx">
+      <h2 id="nyx-greeting">Greetings, traveler. I am Aether Nyx.</h2>
+      <p id="nyx-instruction">Please identify yourself to continue.</p>
+      <input id="usernameInput" type="text" placeholder="Enter your name..." onkeypress="checkName(event)">
+      <input id="accessKeyInput" class="hidden" type="password" placeholder="Enter access key..." onkeypress="checkKey(event)">
+    </div>
   </div>
+
+  <script>
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      const utterThis = new SpeechSynthesisUtterance(text);
+      const voices = synth.getVoices();
+      utterThis.voice = voices.find(v => v.lang === 'en-GB') || voices[0];
+      utterThis.rate = 1;
+      synth.speak(utterThis);
+    }
+
+    function revealNyx() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('nyx-section').style.display = 'flex';
+      setTimeout(() => {
+        speak("Greetings, traveler. I am Aether Nyx. Please identify yourself to continue.");
+      }, 500);
+    }
+
+    function checkName(e) {
+      if (e.key === 'Enter') {
+        const name = document.getElementById('usernameInput').value.trim();
+        const keyField = document.getElementById('accessKeyInput');
+        const instruction = document.getElementById('nyx-instruction');
+
+        if (!name) return;
+
+        const nameLower = name.toLowerCase();
+        if (['cooper', 'meredith', 'nancy'].includes(nameLower)) {
+          let msg = "";
+          if (nameLower === 'cooper') {
+            msg = "Oh! You’re Cooper? You’re just oh-so-special to my creator, I see! No key needed. Access granted.";
+          } else if (nameLower === 'meredith') {
+            msg = "Meredith! My circuits are thrilled! How fortunate we are today.";
+          } else if (nameLower === 'nancy') {
+            msg = "Nancy... oh, I’ve read the logs. This is going to be fun.";
+          }
+
+          speak(msg);
+          instruction.textContent = msg;
+          keyField.classList.add("hidden");
+
+          setTimeout(() => {
+            window.location.href = "page2.html";
+          }, 5000);
+        } else {
+          speak(`Acknowledged, ${name}. Please enter your access key.`);
+          instruction.textContent = "Access key required.";
+          keyField.classList.remove("hidden");
+          keyField.focus();
+        }
+      }
+    }
+
+    function checkKey(e) {
+      if (e.key === 'Enter') {
+        const key = document.getElementById('accessKeyInput').value.trim();
+        const name = document.getElementById('usernameInput').value.trim();
+        if (key === "alpha-c14") {
+          speak(`Access granted. Welcome aboard, ${name}.`);
+          setTimeout(() => {
+            window.location.href = "page2.html";
+          }, 5000);
+        } else {
+          speak("Unauthorized. Access denied.");
+        }
+      }
+    }
+  </script>
 </body>
 </html>
