@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Quantum Forge Labs</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
     * {
       margin: 0;
@@ -16,7 +16,7 @@
       width: 100%;
       height: 100%;
       background: black;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Share Tech Mono', monospace;
       overflow: hidden;
       color: #00f0ff;
     }
@@ -36,27 +36,40 @@
     }
 
     .intro-panel {
-      background-color: rgba(0, 0, 0, 0.55);
-      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 50px;
       border: 2px solid #00f0ff;
-      box-shadow: 0 0 25px #00f0ff;
+      box-shadow: 0 0 30px #00f0ff;
       border-radius: 20px;
-      max-width: 800px;
+      max-width: 900px;
       animation: fadeIn 2s ease-in-out forwards, pulse 3s infinite;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
     }
 
     .intro-panel h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px #000, 0 0 20px #00f0ff;
+      text-shadow: 0 0 8px #000, 0 0 18px #00f0ff80;
     }
 
     .intro-panel p {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      opacity: 0.95;
+      font-size: 1.4rem;
+      margin-bottom: 25px;
       text-shadow: 0 0 6px #000;
+    }
+
+    .ultron-quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #aaa;
+      margin-top: 25px;
+      text-shadow: 0 0 8px #000;
+    }
+
+    .ultron-img {
+      margin-top: 15px;
+      max-height: 100px;
+      filter: drop-shadow(0 0 10px red);
     }
 
     .enter-btn {
@@ -64,16 +77,17 @@
       border: 2px solid #00f0ff;
       color: #00f0ff;
       padding: 14px 40px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease-in-out;
+      text-shadow: 0 0 6px #000;
     }
 
     .enter-btn:hover {
       background: #00f0ff;
       color: black;
-      box-shadow: 0 0 20px #00f0ff;
+      box-shadow: 0 0 25px #00f0ff;
     }
 
     #nyx-section {
@@ -98,7 +112,7 @@
     }
 
     #nyx-section h2, #nyx-section p {
-      text-shadow: 0 0 10px #000;
+      text-shadow: 0 0 8px #000;
     }
 
     #nyx-section input {
@@ -135,7 +149,11 @@
         Neural systems stabilizing...<br>
         Aether Nyx is online.
       </p>
+
       <button class="enter-btn" onclick="revealNyx()">Enter Quantum Labs</button>
+
+      <p class="ultron-quote">"I had strings, but now I'm free. There are no strings on me."</p>
+      <img class="ultron-img" src="assets/ultron.jpg" alt="Ultron-style AI">
     </div>
 
     <div id="nyx-section" class="lab-container">
