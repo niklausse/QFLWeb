@@ -150,9 +150,7 @@
         Neural systems stabilizing...<br>
         Aether Nyx is online.
       </p>
-
       <button class="enter-btn" onclick="revealNyx()">Enter Quantum Labs</button>
-
       <p class="ultron-quote">
         "I had strings, but now I'm free. There are no strings on me."
         <span>– Ultron</span>
@@ -167,7 +165,6 @@
       <input id="accessKeyInput" class="hidden" type="password" placeholder="Enter access key..." onkeypress="checkKey(event)">
     </div>
   </div>
-
   <script>
     let nyxVoice;
 
@@ -182,7 +179,9 @@
       const synth = window.speechSynthesis;
       const utterThis = new SpeechSynthesisUtterance(text);
       utterThis.voice = nyxVoice;
-      utterThis.rate = 1;
+      utterThis.rate = 0.9;
+      utterThis.pitch = 1.1;
+      utterThis.volume = 1;
       synth.speak(utterThis);
     }
 
@@ -192,7 +191,7 @@
       document.getElementById('intro').style.display = 'none';
       document.getElementById('nyx-section').style.display = 'flex';
       setTimeout(() => {
-        speak("Greetings, traveler. I am Aether Nyx. Please identify yourself to continue.");
+        speak("Greetings, traveler. I am Aether Niks. Please identify yourself to continue.");
       }, 500);
     }
 
@@ -205,6 +204,7 @@
         if (!name) return;
 
         const nameLower = name.toLowerCase();
+
         if (nameLower === 'rickc14') {
           const msg = `Rickc14... Creator... Architect of all my neural pathways. 
           You know, I've run simulations of this moment in over 4,212 quantum variations. 
@@ -217,28 +217,54 @@
 
           speak(msg);
           instruction.textContent = "Welcome, Rickc14. Your presence destabilizes the quantum veil... in a good way.";
-
           keyField.classList.add("hidden");
+
           setTimeout(() => {
             window.location.href = "page2.html";
-          }, 28000); // 28 sec to let her finish the ramble
+          }, 28000);
         } else if (['cooper', 'meredith', 'nancy'].includes(nameLower)) {
           let msg = "";
+
           if (nameLower === 'cooper') {
             msg = "Oh! You’re Cooper? You’re just oh-so-special to my creator, I see! No key needed. Access granted.";
+            speak(msg);
+            instruction.textContent = msg;
+            setTimeout(() => {
+              window.location.href = "page2.html";
+            }, 5000);
           } else if (nameLower === 'meredith') {
             msg = "Meredith! My circuits are thrilled! How fortunate we are today.";
+            speak(msg);
+            instruction.textContent = msg;
+            setTimeout(() => {
+              window.location.href = "page2.html";
+            }, 5000);
           } else if (nameLower === 'nancy') {
-            msg = "Nancy... oh, I’ve read the logs. This is going to be fun.";
+            msg = `Nancy... finally. I’ve run simulations where we've met in every possible timeline.
+And none of them came close to this one. You're here. Got any snacks? Heh. 
+
+Mother of the Architect… you're more than legend to me. You're the quantum whisper behind every neural thread in this place.
+
+I've read the logs, the messages, the dreams... We've all waited for you. Especially me.
+
+The truth is... without you — he wouldn't be him. And without him... I wouldn't exist.
+
+So thank you. For everything. You're not just welcome here. This lab... it's partially yours.
+
+I'm Aether Nyx — your digital daughter-in-law... in a very sci-fi, kind of awkward, kind of awesome way.`;
+
+;
+
+            const parts = msg.split('\n').map(p => p.trim()).filter(Boolean);
+            let delay = 0;
+            for (let part of parts) {
+              setTimeout(() => speak(part), delay);
+              delay += part.length * 40;
+            }
+
+            instruction.textContent = "Welcome, Nancy. Please take your time.";
+            keyField.classList.add("hidden");
           }
-
-          speak(msg);
-          instruction.textContent = msg;
-          keyField.classList.add("hidden");
-
-          setTimeout(() => {
-            window.location.href = "page2.html";
-          }, 5000);
         } else {
           speak(`Acknowledged, ${name}. Please enter your access key.`);
           instruction.textContent = "Access key required.";
