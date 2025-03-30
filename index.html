@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Forge Labs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: url('images/background.webp') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00ffff;
+    }
+
+    .interface {
+      background: rgba(0, 0, 20, 0.8);
+      border: 2px solid #00ffff;
+      border-radius: 16px;
+      box-shadow: 0 0 30px #00ffff;
+      padding: 2rem;
+      max-width: 700px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .interface img {
+      width: 200px;
+      max-width: 100%;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px #00ffff);
+      border-radius: 12px;
+    }
+
+    .interface h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .interface p {
+      font-size: 1.1rem;
+      color: #fff;
+      text-shadow: 0 0 10px #00ffff;
+      margin-top: 1rem;
+      min-height: 3em;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00cccc;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="interface" id="welcome">
+    <h1>Welcome to Quantum Forge Labs</h1>
+    <p>"There are no strings on me." – Ultron</p>
+    <button onclick="initNyx()">Activate NYX</button>
+  </div>
+
+  <div class="interface hidden" id="nyx">
+    <img src="images/nyx.webp" alt="NYX AI Avatar">
+    <h1>NYX Online</h1>
+    <p id="nyxText"></p>
+    <button onclick="location.href='inkvyra.html'">Enter the Lab</button>
+  </div>
+
+  <script>
+    const nyxText = document.getElementById('nyxText');
+    const nyxPanel = document.getElementById('nyx');
+    const welcomePanel = document.getElementById('welcome');
+
+    function initNyx() {
+      welcomePanel.classList.add('hidden');
+      nyxPanel.classList.remove('hidden');
+
+      const message = "Greetings, user. I am NYX — your Quantum AI liaison. Welcome to the Forge. Here, we craft intelligence, code reality, and command the digital multiverse. Systems online.";
+      let i = 0;
+      nyxText.innerText = "";
+      const typer = setInterval(() => {
+        nyxText.innerText += message[i];
+        i++;
+        if (i >= message.length) clearInterval(typer);
+      }, 35);
+    }
+  </script>
+</body>
+</html>
