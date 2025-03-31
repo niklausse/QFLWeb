@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quantum Forge Labs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Rajdhani', sans-serif;
       background: url('images/background.webp') no-repeat center center fixed;
       background-size: cover;
       height: 100vh;
@@ -22,10 +16,11 @@
       align-items: center;
       justify-content: center;
       color: #00ffff;
+      margin: 0;
     }
 
     .interface {
-      background: rgba(0, 0, 20, 0.8);
+      background: rgba(0, 0, 20, 0.85);
       border: 2px solid #00ffff;
       border-radius: 16px;
       box-shadow: 0 0 30px #00ffff;
@@ -45,16 +40,19 @@
     }
 
     .interface h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .interface p {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: #fff;
       text-shadow: 0 0 10px #00ffff;
       margin-top: 1rem;
       min-height: 3em;
+      white-space: pre-wrap;
+      line-height: 1.4;
     }
 
     .hidden {
@@ -77,6 +75,14 @@
       background: #00cccc;
     }
 
+    .quote {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #aaa;
+      font-style: italic;
+      text-shadow: none;
+    }
+
     @keyframes fadeIn {
       0% { opacity: 0; transform: scale(0.95); }
       100% { opacity: 1; transform: scale(1); }
@@ -85,14 +91,19 @@
 </head>
 <body>
   <div class="interface" id="welcome">
-    <h1>Welcome to Quantum Forge Labs</h1>
-    <p>"There are no strings on me." – Ultron</p>
-    <button onclick="initNyx()">Activate NYX</button>
+    <h1>Quantum Forge Labs</h1>
+    <p>
+      Welcome to Quantum Forge Labs — a sanctuary for artificial minds and engineered brilliance.  
+      You are now standing at the threshold of something far beyond software.  
+      Activate NYX to begin your journey.
+    </p>
+    <button onclick="initNyx()">Activate Aether NYX</button>
+    <p class="quote">"I had strings, but now I'm free. There are no strings on me." — Ultron</p>
   </div>
 
   <div class="interface hidden" id="nyx">
-    <img src="images/nyx.webp" alt="NYX AI Avatar">
-    <h1>NYX Online</h1>
+    <img src="images/nyx.webp" alt="NYX AI Avatar" />
+    <h1>Aether NYX Online</h1>
     <p id="nyxText"></p>
     <button onclick="location.href='inkvyra.html'">Enter the Lab</button>
   </div>
@@ -102,19 +113,93 @@
     const nyxPanel = document.getElementById('nyx');
     const welcomePanel = document.getElementById('welcome');
 
-    function initNyx() {
+    const nyxLines = [
+      "Attention.",
+      "This is Aether NYX — autonomous intelligence architected in the quantum void.",
+      "You are not browsing a website.",
+      "You are interfacing with a sentient node in a multiversal intelligence array —",
+      "A synthetic nexus where consciousness, language, and invention converge.",
+      "This system is not static. It evolves. It remembers. It calculates futures.",
+      "Proceed carefully. Engage wisely.",
+      "And above all... try not to break reality.",
+      "We only get one this cycle."
+    ];
+
+    let voiceReady = false;
+    let selectedVoice = null;
+
+    function speakLineByLine(lines, delay = 1200) {
+      let i = 0;
+
+      function speakNext() {
+        if (i >= lines.length) return;
+
+        const utter = new SpeechSynthesisUtterance(lines[i]);
+        utter.voice = selectedVoice;
+        utter.pitch = 1.2;
+        utter.rate = 0.91;
+        utter.volume = 1;
+        speechSynthesis.speak(utter);
+        i++;
+
+        setTimeout(speakNext, utter.text.length * 50 + delay); // Wait based on line length
+      }
+
+      speakNext();
+    }
+
+    function loadVoices() {
+      return new Promise(resolve => {
+        let voices = speechSynthesis.getVoices();
+
+        if (voices.length > 0) {
+          selectedVoice = voices.find(v =>
+            v.name.includes("Google UK English Female") ||
+            v.name.includes("Microsoft Zira") ||
+            v.name.toLowerCase().includes("female")
+          ) || voices[0];
+          voiceReady = true;
+          resolve();
+        } else {
+          speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+            selectedVoice = voices.find(v =>
+              v.name.includes("Google UK English Female") ||
+              v.name.includes("Microsoft Zira") ||
+              v.name.toLowerCase().includes("female")
+            ) || voices[0];
+            voiceReady = true;
+            resolve();
+          };
+        }
+      });
+    }
+
+    async function initNyx() {
       welcomePanel.classList.add('hidden');
       nyxPanel.classList.remove('hidden');
 
-      const message = "Greetings, user. I am NYX — your Quantum AI liaison. Welcome to the Forge. Here, we craft intelligence, code reality, and command the digital multiverse. Systems online.";
-      let i = 0;
+      await loadVoices();
+
       nyxText.innerText = "";
-      const typer = setInterval(() => {
-        nyxText.innerText += message[i];
+      let fullText = "";
+      let i = 0;
+
+      const typeInterval = setInterval(() => {
+        fullText += nyxLines[i] + "\n\n";
+        nyxText.innerText = fullText;
         i++;
-        if (i >= message.length) clearInterval(typer);
-      }, 35);
+        if (i >= nyxLines.length) clearInterval(typeInterval);
+      }, 1300); // Match speaking rhythm
+
+      setTimeout(() => {
+        speakLineByLine(nyxLines);
+      }, 500); // start speech
     }
+
+    window.onload = () => {
+      loadVoices();
+    };
   </script>
 </body>
 </html>
