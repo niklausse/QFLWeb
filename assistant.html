@@ -74,12 +74,26 @@
     <h1>AI Writing Assistant</h1>
     <textarea id="prompt" placeholder="Enter your writing prompt here..."></textarea>
     <button onclick="generateText()">Generate</button>
+    <button onclick="setApiKey()">Set API Key</button>
     <div id="result" class="output"></div>
     <div class="back-link"><a href="index.html">&larr; Back to Home</a></div>
   </div>
 <script>
-  const apiKey = 'YOUR_OPENAI_API_KEY'; // replace with your OpenAI API key
+  let apiKey = localStorage.getItem('openai_key') || '';
+
+  function setApiKey() {
+    const key = prompt('Enter your OpenAI API key:');
+    if (key) {
+      apiKey = key.trim();
+      localStorage.setItem('openai_key', apiKey);
+      alert('API key saved locally.');
+    }
+  }
   async function generateText() {
+    if (!apiKey) {
+      alert('Please set your OpenAI API key first.');
+      return;
+    }
     const prompt = document.getElementById('prompt').value.trim();
     if (!prompt) return;
     const resultDiv = document.getElementById('result');

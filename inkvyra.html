@@ -165,6 +165,7 @@
       <h2>Writing Assistant</h2>
       <textarea id="inkPrompt" placeholder="Enter your prompt for Inkvyra..."></textarea>
       <button onclick="generateInkvyraText()">Generate</button>
+      <button onclick="setApiKey()">Set API Key</button>
       <div id="inkResult" class="output"></div>
     </div>
     <div class="back-link">
@@ -172,8 +173,22 @@
     </div>
   </div>
   <script>
-    const apiKey = 'YOUR_OPENAI_API_KEY';
+    let apiKey = localStorage.getItem('openai_key') || '';
+
+    function setApiKey() {
+      const key = prompt('Enter your OpenAI API key:');
+      if (key) {
+        apiKey = key.trim();
+        localStorage.setItem('openai_key', apiKey);
+        alert('API key saved locally.');
+      }
+    }
+
     async function generateInkvyraText() {
+      if (!apiKey) {
+        alert('Please set your OpenAI API key first.');
+        return;
+      }
       const prompt = document.getElementById('inkPrompt').value.trim();
       if (!prompt) return;
       const resultDiv = document.getElementById('inkResult');
