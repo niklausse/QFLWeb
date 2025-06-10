@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Writing Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Rajdhani', sans-serif;
+      background: #0b0b13;
+      color: #e0e0ff;
+      padding: 2rem;
+      background-image: url('images/background.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(0, 0, 35, 0.85);
+      border: 2px solid #00ffff;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 30px #00ffff;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #00ffff;
+      background: #000;
+      color: #fff;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #00ffff;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #00cccc;
+    }
+    .output {
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      min-height: 150px;
+      border: 1px solid #00ffff;
+      padding: 0.5rem;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.6);
+    }
+    .back-link {
+      margin-top: 1rem;
+    }
+    .back-link a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Writing Assistant</h1>
+    <textarea id="prompt" placeholder="Enter your writing prompt here..."></textarea>
+    <button onclick="generateText()">Generate</button>
+    <button onclick="setApiKey()">Set API Key</button>
+    <div id="result" class="output"></div>
+    <div class="back-link"><a href="index.html">&larr; Back to Home</a></div>
+  </div>
+<script>
+  let apiKey = localStorage.getItem('openai_key') || '';
+
+  function setApiKey() {
+    const key = prompt('Enter your OpenAI API key:');
+    if (key) {
+      apiKey = key.trim();
+      localStorage.setItem('openai_key', apiKey);
+      alert('API key saved locally.');
+    }
+  }
+  async function generateText() {
+    if (!apiKey) {
+      alert('Please set your OpenAI API key first.');
+      return;
+    }
+    const prompt = document.getElementById('prompt').value.trim();
+    if (!prompt) return;
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = 'Generating...';
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: 'gpt-3.5-turbo',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.7
+        })
+      });
+      const data = await response.json();
+      if (data.choices && data.choices.length > 0) {
+        resultDiv.textContent = data.choices[0].message.content.trim();
+      } else {
+        resultDiv.textContent = 'No response';
+      }
+    } catch (err) {
+      resultDiv.textContent = 'Error: ' + err.message;
+    }
+  }
+</script>
+</body>
+</html>
