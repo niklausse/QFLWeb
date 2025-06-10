@@ -102,6 +102,48 @@
     .back-link a:hover {
       text-decoration: underline;
     }
+
+    .assistant {
+      margin-top: 2rem;
+    }
+
+    .assistant textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ff00ff;
+      background: #000;
+      color: #fff;
+      resize: vertical;
+    }
+
+    .assistant button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff00ff;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .assistant button:hover {
+      background: #cc00cc;
+    }
+
+    .assistant .output {
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      min-height: 150px;
+      border: 1px solid #ff00ff;
+      padding: 0.5rem;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+    }
   </style>
 </head>
 <body>
@@ -119,9 +161,46 @@
       <button class="button" onclick="alert('Inkvyra is not yet linked to her core. Activation pending.')">Use Inkvyra</button>
       <a href="lokode.html"><button class="button next-bot">Summon LoKode →</button></a>
     </div>
+    <div class="assistant">
+      <h2>Writing Assistant</h2>
+      <textarea id="inkPrompt" placeholder="Enter your prompt for Inkvyra..."></textarea>
+      <button onclick="generateInkvyraText()">Generate</button>
+      <div id="inkResult" class="output"></div>
+    </div>
     <div class="back-link">
       <a href="index.html">← Return to Forge Entry</a>
     </div>
   </div>
+  <script>
+    const apiKey = 'YOUR_OPENAI_API_KEY';
+    async function generateInkvyraText() {
+      const prompt = document.getElementById('inkPrompt').value.trim();
+      if (!prompt) return;
+      const resultDiv = document.getElementById('inkResult');
+      resultDiv.textContent = 'Generating...';
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.7
+          })
+        });
+        const data = await response.json();
+        if (data.choices && data.choices.length > 0) {
+          resultDiv.textContent = data.choices[0].message.content.trim();
+        } else {
+          resultDiv.textContent = 'No response';
+        }
+      } catch (err) {
+        resultDiv.textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
 </body>
 </html>
