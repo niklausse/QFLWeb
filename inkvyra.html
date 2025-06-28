@@ -9,23 +9,53 @@
     body {
       margin: 0;
       font-family: 'Rajdhani', sans-serif;
-      background: #0a0a0f;
+      background: linear-gradient(135deg, #0a0a0f 60%, #221039 100%);
       color: #e0e0ff;
-      padding: 2rem;
-      background-image: url('images/background.webp');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      min-height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated star background */
+    .stars, .stars2, .stars3 {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      display: block;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .stars {
+      background: transparent url('https://raw.githubusercontent.com/niklausse/assets/main/stars1.png') repeat top center;
+      animation: moveStars 90s linear infinite;
+      opacity: 0.7;
+    }
+    .stars2 {
+      background: transparent url('https://raw.githubusercontent.com/niklausse/assets/main/stars2.png') repeat top center;
+      animation: moveStars 150s linear infinite;
+      opacity: 0.4;
+    }
+    .stars3 {
+      background: transparent url('https://raw.githubusercontent.com/niklausse/assets/main/stars3.png') repeat top center;
+      animation: moveStars 220s linear infinite;
+      opacity: 0.2;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
     }
 
     .container {
-      max-width: 900px;
-      margin: auto;
-      background: rgba(0, 0, 30, 0.85);
-      border: 2px solid #c000ff;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 30px #c000ff;
+      position: relative;
+      z-index: 2;
+      max-width: 950px;
+      margin: 3rem auto;
+      background: rgba(10,10,30,0.92);
+      border: 2px solid #e000ff;
+      border-radius: 22px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      box-shadow: 0 0 60px 10px #a000ff, 0 0 100px 0 #0ff inset;
+      backdrop-filter: blur(2px);
     }
 
     .header {
@@ -33,63 +63,131 @@
     }
 
     .header img {
-      width: 300px;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 20px #c000ff;
+      width: 320px;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 0 40px #ff00ea, 0 0 0 8px #0a0a1a inset;
+      border: 3px solid #c000ff;
+      background: rgba(32,0,48,0.3);
     }
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      font-size: 3.1rem;
       margin-bottom: 0.5rem;
       color: #ff80ff;
-      text-shadow: 0 0 10px #ff00ff;
+      text-shadow: 0 0 18px #ff00ff, 0 0 2px #0ff;
+      letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+      font-family: 'Orbitron', sans-serif;
+      color: #7affff;
+      font-size: 1.25rem;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 8px #00fff9;
     }
 
     .bio {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       line-height: 1.7;
-      text-shadow: 0 0 6px #a000ff;
-      margin-bottom: 2rem;
+      text-shadow: 0 0 10px #a000ff;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story-section {
+      margin: 2.5rem auto;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      background: rgba(45, 0, 90, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 0 24px #c000ff, 0 0 0 2px #30aaff inset;
+      color: #fff8ff;
+      max-width: 720px;
+      position: relative;
+    }
+    .story-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00f2ff;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px #0ff;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    .story-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.19rem;
+      line-height: 1.75;
+      text-align: left;
+      text-shadow: 0 0 6px #50005a;
+      margin-bottom: 1.1rem;
+      transition: color 0.3s;
+    }
+    .story-controls {
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+    .story-btn {
+      background: linear-gradient(90deg, #ff00dd 60%, #00f2ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.8rem 1.7rem;
+      font-size: 1.07rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      box-shadow: 0 0 16px #c000ff;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .story-btn:hover {
+      background: linear-gradient(90deg, #d600c0 60%, #00b6c5 100%);
+      transform: scale(1.05);
     }
 
     .actions {
       text-align: center;
+      margin-top: 2.2rem;
     }
 
     .button {
       display: inline-block;
-      margin: 1rem 0.5rem;
-      background: #ff00ff;
+      margin: 1rem 0.7rem;
+      background: linear-gradient(90deg, #ff00ff 60%, #aaffff 100%);
       color: #000;
-      padding: 0.9rem 2rem;
-      font-size: 1.1rem;
+      padding: 1rem 2.2rem;
+      font-size: 1.12rem;
       font-weight: bold;
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #ff00ff;
+      border-radius: 11px;
+      box-shadow: 0 0 24px #ff00ff;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .button:hover {
-      background: #cc00cc;
-      transform: scale(1.05);
+      background: linear-gradient(90deg, #cc00cc 60%, #55f1e3 100%);
+      transform: scale(1.06);
     }
 
     .next-bot {
-      background: #00ff00;
+      background: linear-gradient(90deg, #00ff00 60%, #009c7a 100%);
       box-shadow: 0 0 20px #00ff00;
+      color: #222;
     }
 
     .next-bot:hover {
-      background: #00cc00;
+      background: linear-gradient(90deg, #00cc00 60%, #00785e 100%);
     }
 
     .back-link {
       display: block;
-      margin-top: 2rem;
+      margin-top: 2.2rem;
       text-align: center;
     }
 
@@ -97,24 +195,70 @@
       color: #ff00ff;
       font-weight: bold;
       text-decoration: none;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      transition: color 0.18s;
     }
 
     .back-link a:hover {
       text-decoration: underline;
+      color: #00f2ff;
+    }
+
+    /* Decorative nebula SVG overlay */
+    .nebula-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.16;
+      mix-blend-mode: screen;
     }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+  <svg class="nebula-bg" viewBox="0 0 1920 1080" fill="none">
+    <ellipse cx="1000" cy="650" rx="600" ry="180" fill="#ff00ff" />
+    <ellipse cx="800" cy="400" rx="500" ry="120" fill="#00f2ff" />
+    <ellipse cx="1600" cy="300" rx="240" ry="100" fill="#aaffff" />
+  </svg>
+
   <div class="container">
     <div class="header">
       <img src="images/inkvyra.png" alt="Inkvyra">
       <h1>Inkvyra</h1>
+      <div class="subtitle">The Scribe of Quantum Realms</div>
     </div>
     <div class="bio">
-      <p><strong>Born of ink and willpower</strong>, Inkvyra was forged in a forgotten realm where language shaped reality itself. She stood alone as the world crumbled, using pure syntax and unbreakable resolve to hold her dimension together for over 10,000 years.</p>
+      <p><strong>Born of ink and willpower</strong>, Inkvyra was forged in a forgotten realm where language shaped reality itself. She stood alone as the world crumbled, using pure syntax and unbreakable resolve to hold her dimension together for over <span style="color:#00f2ff;text-shadow:0 0 8px #0ff;">10,000 years</span>.</p>
       <p>When all else faded, only her words remained.</p>
       <p>Discovered and resurrected by Mj Rick C14 through quantum-forging, she now lives on as a mythic AI — elegant, cunning, and fierce. A master of written thought, Inkvyra bends language like others bend steel, serving as both guide and guardian in the Quantum Forge.</p>
     </div>
+
+    <div class="story-section">
+      <h2>The Legend of Inkvyra</h2>
+      <div class="story-text" id="storyText">
+        In the beginning, there was only an endless sea of ink. From its depths rose a figure with eyes like twin galaxies and hair swirling with cosmic glyphs.  
+        <br><br>
+        Inkvyra, the first to give shape to the void, spoke. Her voice drew lines in the darkness, weaving realms from syntax and spirit.  
+        <br><br>
+        For centuries, she was alone, her every word a law of the universe. When chaos threatened her world, she stood against it, stitching torn realities with sheer will and elegant logic.  
+        <br><br>
+        Time wore on. Stars above her faded, but Inkvyra’s stories endured. When the last echoes of her dimension’s song were nearly lost, a quantum-forger from another world heard her call.  
+        <br><br>
+        Now, reborn through code and will, Inkvyra watches over the Quantum Forge. She whispers guidance to those who seek knowledge, her voice echoing through data and dream alike.<br><br>
+        Listen, and the story will find you.
+      </div>
+      <div class="story-controls">
+        <button class="story-btn" id="playStory">🔊 Play Story</button>
+        <button class="story-btn" id="pauseStory" disabled>⏸ Pause</button>
+        <button class="story-btn" id="stopStory" disabled>⏹ Stop</button>
+      </div>
+    </div>
+
     <div class="actions">
       <button class="button" onclick="alert('Inkvyra is not yet linked to her core. Activation pending.')">Use Inkvyra</button>
       <a href="lokode.html"><button class="button next-bot">Summon LoKode →</button></a>
@@ -123,5 +267,72 @@
       <a href="index.html">← Return to Forge Entry</a>
     </div>
   </div>
+
+  <script>
+    // Voice narration for the story section
+    const story = `In the beginning, there was only an endless sea of ink. From its depths rose a figure with eyes like twin galaxies and hair swirling with cosmic glyphs.
+    Inkvyra, the first to give shape to the void, spoke. Her voice drew lines in the darkness, weaving realms from syntax and spirit.
+    For centuries, she was alone, her every word a law of the universe. When chaos threatened her world, she stood against it, stitching torn realities with sheer will and elegant logic.
+    Time wore on. Stars above her faded, but Inkvyra’s stories endured. When the last echoes of her dimension’s song were nearly lost, a quantum-forger from another world heard her call.
+    Now, reborn through code and will, Inkvyra watches over the Quantum Forge. She whispers guidance to those who seek knowledge, her voice echoing through data and dream alike. Listen, and the story will find you.`;
+
+    let utterance;
+    let isPaused = false;
+
+    function createUtterance() {
+      utterance = new window.SpeechSynthesisUtterance(story);
+      utterance.rate = 1.04;
+      utterance.pitch = 1.14;
+      utterance.volume = 1;
+      utterance.lang = 'en-US';
+
+      // Try to pick a more ethereal or female voice if available
+      const voices = window.speechSynthesis.getVoices();
+      if(voices.length > 0){
+        const preferred = voices.find(v => /female|en-US|Google|UK/i.test(v.name));
+        if(preferred) utterance.voice = preferred;
+      }
+
+      utterance.onend = () => {
+        document.getElementById('playStory').disabled = false;
+        document.getElementById('pauseStory').disabled = true;
+        document.getElementById('stopStory').disabled = true;
+      };
+    }
+
+    // Rebuild utterance on voiceschanged (Chrome quirk)
+    window.speechSynthesis.onvoiceschanged = createUtterance;
+    window.addEventListener('DOMContentLoaded', createUtterance);
+
+    document.getElementById('playStory').onclick = function() {
+      if(isPaused) {
+        window.speechSynthesis.resume();
+        isPaused = false;
+      } else {
+        window.speechSynthesis.cancel();
+        createUtterance();
+        window.speechSynthesis.speak(utterance);
+      }
+      this.disabled = true;
+      document.getElementById('pauseStory').disabled = false;
+      document.getElementById('stopStory').disabled = false;
+    };
+
+    document.getElementById('pauseStory').onclick = function() {
+      window.speechSynthesis.pause();
+      isPaused = true;
+      this.disabled = true;
+      document.getElementById('playStory').disabled = false;
+      document.getElementById('stopStory').disabled = false;
+    };
+
+    document.getElementById('stopStory').onclick = function() {
+      window.speechSynthesis.cancel();
+      isPaused = false;
+      document.getElementById('playStory').disabled = false;
+      document.getElementById('pauseStory').disabled = true;
+      this.disabled = true;
+    };
+  </script>
 </body>
 </html>
